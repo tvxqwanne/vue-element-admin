@@ -35,6 +35,29 @@ export const constantRouterMap = [
     icon: 'people',
     noDropdown: true,
     children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
+  },
+  {
+    path: '/stat',
+    component: Layout,
+    redirect: 'noredirect',
+    name: '用水统计分析',
+    icon: 'example',
+    children: [
+      {
+        path: '/stat/south',
+        component: _import('stat/south/index'),
+        redirect: '/stat/south',
+        name: '校园南区',
+        icon: 'table',
+        children: [
+          { path: 'south1', component: _import('stat/south/south1'), name: '科学楼' },
+          { path: 'south2', component: _import('stat/south/south2'), name: '第三教学楼' }
+        ]
+      },
+      { path: 'form/edit', icon: 'form', component: _import('example/form'), name: '编辑Form', meta: { isEdit: true }},
+      { path: 'form/create', icon: 'form', component: _import('example/form'), name: '创建Form' },
+      { path: 'tab/index', icon: 'tab', component: _import('example/tab/index'), name: 'Tab' }
+    ]
   }
 ]
 
