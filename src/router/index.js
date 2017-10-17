@@ -20,22 +20,30 @@ export const constantRouterMap = [
     { path: '/authredirect', component: _import('login/authredirect'), hidden: true },
     { path: '/404', component: _import('errorPage/404'), hidden: true },
     { path: '/401', component: _import('errorPage/401'), hidden: true },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   name: '首页',
+  //   hidden: true,
+  //   children: [{ path: 'dashboard', component: _import('dashboard/index') }]
+  // },
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/homepage',
     name: '首页',
     hidden: true,
-    children: [{ path: 'dashboard', component: _import('dashboard/index') }]
+    children: [{ path: 'homepage', component: _import('homepage/index') }]
   },
-  {
-    path: '/introduction',
-    component: Layout,
-    redirect: '/introduction/index',
-    icon: 'people',
-    noDropdown: true,
-    children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
-  },
+  // {
+  //   path: '/introduction',
+  //   component: Layout,
+  //   redirect: '/introduction/index',
+  //   icon: 'people',
+  //   noDropdown: true,
+  //   children: [{ path: 'index', component: _import('introduction/index'), name: '简述' }]
+  // },
   {
     path: '/stat',
     component: Layout,
@@ -46,18 +54,104 @@ export const constantRouterMap = [
       {
         path: '/stat/south',
         component: _import('stat/south/index'),
-        redirect: '/stat/south',
+        redirect: '/stat/south/south1',
         name: '校园南区',
-        icon: 'table',
+        icon: 'component',
         children: [
           { path: 'south1', component: _import('stat/south/south1'), name: '科学楼' },
           { path: 'south2', component: _import('stat/south/south2'), name: '第三教学楼' }
         ]
       },
-      { path: 'form/edit', icon: 'form', component: _import('example/form'), name: '编辑Form', meta: { isEdit: true }},
-      { path: 'form/create', icon: 'form', component: _import('example/form'), name: '创建Form' },
-      { path: 'tab/index', icon: 'tab', component: _import('example/tab/index'), name: 'Tab' }
+      {
+        path: '/stat/dormitory',
+        component: _import('stat/dormitory/index'),
+        redirect: '/stat/dormitory/south',
+        name: '中蓝公寓',
+        icon: 'component',
+        children: [
+          { path: 'south', component: _import('stat/dormitory/south'), name: '南楼' },
+          { path: 'north', component: _import('stat/dormitory/north'), name: '北楼' }
+        ]
+      }
     ]
+  },
+  {
+    path: '/realTime',
+    component: Layout,
+    redirect: 'noredirect',
+    name: '用水实时监管',
+    icon: 'icon',
+    children: [
+      {
+        path: '/realTime/south',
+        component: _import('realTime/south/index'),
+        name: '校园南区',
+        icon: 'component',
+        children: [
+          {
+            path: '/realTime/south/south1',
+            component: _import('realTime/south/south1/index'),
+            redirect: '/realTime/south/south1/east/index',
+            name: '科学楼',
+            icon: 'chart',
+            children: [
+              { path: 'west', component: _import('realTime/south/south1/west'), name: '西进户表' },
+              { path: 'east', component: _import('realTime/south/south1/east/index'), name: '东进户表' }
+            ]
+          },
+          {
+            path: '/realTime/south/south2',
+            component: _import('realTime/south/south2/index'),
+            redirect: '/realTime/south/south2/east',
+            name: '第三教学楼',
+            icon: 'chart',
+            children: [
+              { path: 'west', component: _import('realTime/south/south2/west'), name: '西卫生间' },
+              { path: 'east', component: _import('realTime/south/south2/east'), name: '东卫生间' }
+            ]
+          }
+        ]
+      },
+      {
+        path: '/realTime/dormitory',
+        component: _import('realTime/dormitory/index'),
+        name: '中蓝公寓',
+        icon: 'component',
+        children: [
+          {
+            path: '/realTime/dormitory/south',
+            component: _import('realTime/dormitory/south/index'),
+            redirect: '/realTime/dormitory/south/low',
+            name: '南楼',
+            icon: 'chart',
+            children: [
+              { path: 'low', component: _import('realTime/dormitory/south/low'), name: 'A区低层' },
+              { path: 'high', component: _import('realTime/dormitory/south/high'), name: '高层' }
+            ]
+          },
+          {
+            path: '/realTime/dormitory/north',
+            component: _import('realTime/dormitory/north/index'),
+            redirect: '/realTime/dormitory/north/bZone',
+            name: '北楼',
+            icon: 'chart',
+            children: [
+              { path: 'bZone', component: _import('realTime/dormitory/north/bZone'), name: 'B区自来水' },
+              { path: 'cZone', component: _import('realTime/dormitory/north/cZone'), name: 'C区自来水' }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/homepage',
+    component: Layout,
+    redirect: '/homepage/index',
+    name: '需水量预测',
+    icon: 'form'
+    // ,
+    // children: [{ path: 'homepage', component: _import('homepage/index') }]
   }
 ]
 
